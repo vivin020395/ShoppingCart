@@ -1,0 +1,3 @@
+Place the images under 
+
+ShoppingCartFrontEnd\src\main\webapp\WEB-INF\resources\images\featured.
