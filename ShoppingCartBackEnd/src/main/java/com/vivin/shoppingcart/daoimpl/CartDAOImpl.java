@@ -13,7 +13,9 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.vivin.shoppingcart.dao.MyCartDAO;
 import com.vivin.shoppingcart.dao.MyCartDAO;
+import com.vivin.shoppingcart.domain.Category;
 import com.vivin.shoppingcart.domain.MyCart;
+import com.vivin.shoppingcart.domain.Product;
 
 @Repository("cartDAO")
 public class CartDAOImpl implements MyCartDAO {
@@ -84,12 +86,6 @@ public class CartDAOImpl implements MyCartDAO {
 
 	}
 
-
-	@Transactional
-	public MyCart get(String id) {
-		return (MyCart) sessionFactory.getCurrentSession().get(MyCart.class, id);
-	}
-
 	@Transactional
 	public boolean delete(int id) {
 		try {
@@ -130,7 +126,7 @@ public class CartDAOImpl implements MyCartDAO {
 	@Transactional
 	public boolean deleteAllProductsInCart(String id) {
 		try {
-			sessionFactory.getCurrentSession().createQuery("delete from MyCart where userid = ?").setString(0, id)
+			sessionFactory.getCurrentSession().createQuery("delete from MyCart where userId = ?").setString(0, id)
 					.executeUpdate();
 
 		} catch (Exception e) {
@@ -142,13 +138,16 @@ public class CartDAOImpl implements MyCartDAO {
 	}
 
 	@Transactional
-	public Integer getCartSizeByStatus(String id, char status) {
-		String hql = "select quantity from  MyCart where userID = ?  and  status =?";
+	public List<MyCart> listCartByStatus(String userID, char status) {
 
-		Query query = sessionFactory.getCurrentSession().createQuery(hql);
-		query.setString(0, id);
-		query.setCharacter(1, status);
+		return sessionFactory.getCurrentSession()
+				.createQuery("from MyCart where userID=" + "'" + userID + "' " + "  and status = " + "'" + status + "'")
+				.list();
 
-		return (Integer) query.uniqueResult();
+	}
+
+	@Transactional
+	public List<MyCart> list() {
+		return sessionFactory.getCurrentSession().createQuery("from MyCart").list();
 	}
 }

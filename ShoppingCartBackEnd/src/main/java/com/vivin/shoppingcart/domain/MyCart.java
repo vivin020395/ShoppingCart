@@ -1,6 +1,8 @@
 package com.vivin.shoppingcart.domain;
 
-import java.sql.Date;
+
+
+import java.util.Date;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -26,6 +28,33 @@ public class MyCart {
 	private String userId;
 	private String productId;
 	private String address;
+	private int days;
+	private Date datePurchased;
+	private Date deliveryDate;
+
+	public Date getDeliveryDate() {
+		return deliveryDate;
+	}
+
+	public void setDeliveryDate(Date deliveryDate) {
+		this.deliveryDate = deliveryDate;
+	}
+
+	public Date getDatePurchased() {
+		return datePurchased;
+	}
+
+	public void setDatePurchased(Date datePurchased) {
+		this.datePurchased = datePurchased;
+	}
+
+	public int getDays() {
+		return days;
+	}
+
+	public void setDays(int days) {
+		this.days = days;
+	}
 
 	public String getAddress() {
 		return address;

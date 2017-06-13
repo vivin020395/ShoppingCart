@@ -19,6 +19,7 @@ public class User {
 
 	// we have mention which one is primary key
 	@Id
+	@Column(name="ID")
 	private String id;
 
 	// if the field name in table and property name in
