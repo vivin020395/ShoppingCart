@@ -86,7 +86,7 @@ public class CategoryController {
 			return mv;
 		}
 
-		if (categoryDAO.delete(id) == true) {
+		if (categoryDAO.delete(id)) {
 			mv.addObject("categoryMessage", "Successfullly deleted");
 		} else {
 			mv.addObject("categoryMessage", "Failed to delete");
@@ -125,7 +125,7 @@ public class CategoryController {
 
 		mv.addObject("isAdminClickedCategories", "true");
 		mv.addObject("isAdmin", "true");
-		if (categoryDAO.update(category) == true)
+		if (categoryDAO.update(category))
 			mv.addObject("Edited Successfully");
 		else
 			mv.addObject("Editing Failed");

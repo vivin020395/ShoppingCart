@@ -12,47 +12,61 @@
 <title>ComputerWorld</title>
 </head>
 <body style="padding-top: 50px">
-	<sql:setDataSource var="myDS" driver="org.h2.Driver"
-		url="jdbc:h2:tcp://localhost/~/MyDB" user="sa" password="" />
-
-	<sql:query var="listProducts" dataSource="${myDS}">
-        SELECT * FROM product where category_id = 5;
-    </sql:query>
-	<sql:query var="listProducts2" dataSource="${myDS}">
-        SELECT * FROM product where category_id = 4;
-    </sql:query>
-	<sql:query var="listProducts3" dataSource="${myDS}">
-        SELECT * FROM product where category_id = 6;
-    </sql:query>
-
 	<div class="cw-content">
 		<div class="container">
 			<div class="row">
 				<div class="col-md-4">
-					<div class="list-group">
-						<a href="#" class="list-group-item disabled">
-							<h4>CPU</h4>
-						</a>
-						<c:forEach var="products2" items="${listProducts2.rows}">
-							<a href="viewProduct/${products2.id}" class="list-group-item">${products2.name}<span
-								class="badge">${products2.stock}</span></a>
-						</c:forEach>
+					<div id="MainMenu">
+						<div class="list-group panel">
+							<a href="#cat3" class="list-group-item list-group-item-success"
+								data-toggle="collapse" data-parent="#MainMenu">${CPULIST.name}</a>
+							<div class="collapse" id="cat3">
+								<c:forEach var="products" items="${productList}">
+									<a href="viewProduct/${products.id}" class="list-group-item">${products.name}<span
+										class="badge">${products.stock}</span></a>
+								</c:forEach>
+							</div>
+							<a href="#cat4" class="list-group-item list-group-item-success"
+								data-toggle="collapse" data-parent="#MainMenu2">${MOTHERBOARDLIST.name}</a>
+							<div class="collapse" id="cat4">
+								<c:forEach var="products" items="${productList2}">
+									<a href="viewProduct/${products.id}" class="list-group-item">${products.name}<span
+										class="badge">${products.stock}</span></a>
+								</c:forEach>
+							</div>
+							<a href="#cat5" class="list-group-item list-group-item-success"
+								data-toggle="collapse" data-parent="#MainMenu2">${MEMORYLIST.name}</a>
+							<div class="collapse" id="cat5">
+								<c:forEach var="products" items="${productList3}">
+									<a href="viewProduct/${products.id}" class="list-group-item">${products.name}<span
+										class="badge">${products.stock}</span></a>
+								</c:forEach>
+							</div>
+							<a href="#cat6" class="list-group-item list-group-item-success"
+								data-toggle="collapse" data-parent="#MainMenu2">${VIDEOCARDLIST.name}</a>
+							<div class="collapse" id="cat6">
+								<c:forEach var="products" items="${productList4}">
+									<a href="viewProduct/${products.id}" class="list-group-item">${products.name}<span
+										class="badge">${products.stock}</span></a>
+								</c:forEach>
+							</div>
+							<a href="#cat7" class="list-group-item list-group-item-success"
+								data-toggle="collapse" data-parent="#MainMenu2">${STORAGELIST.name}</a>
+							<div class="collapse" id="cat7">
+								<c:forEach var="products" items="${productList5}">
+									<a href="viewProduct/${products.id}" class="list-group-item">${products.name}<span
+										class="badge">${products.stock}</span></a>
+								</c:forEach>
+							</div>
+						</div>
 					</div>
 
-					<div class="list-group">
-						<a href="#" class="list-group-item disabled">
-							<h4>Video Card</h4>
-						</a>
-						<c:forEach var="products3" items="${listProducts3.rows}">
-							<a href="viewProduct/${products3.id}" class="list-group-item">${products3.name}<span
-								class="badge">${products3.stock}</span></a>
-						</c:forEach>
-					</div>
 				</div>
 
-				<div class="col-md-8">
+
+				<div class="col-md-7">
 					<!-- c for each with image and product name price -->
-					<c:forEach var="products" items="${listProducts.rows}">
+					<c:forEach var="products" items="${productList3}">
 						<div class="col-md-4">
 							<a href="viewProduct/${products.id}"> <img
 								src="resources/images/featured/
@@ -69,6 +83,13 @@
 							</div>
 						</div>
 					</c:forEach>
+				</div>
+				<div class="col-md-1">
+					<select name="sortBy">
+						<option selected disabled>Sort by price</option>
+						<option value="low">Low to High</option>
+						<option value="high">High to Low</option>
+					</select>
 				</div>
 			</div>
 

@@ -43,13 +43,18 @@
 					</div>
 
 					<div class="section" style="padding-bottom: 20px;">
-						<a href="myCart/add/${selectedProduct.id}">
-							<button class="btn btn-success">
-								<span style="margin-right: 20px"
-									class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span>
-								Add to Cart
-							</button>
-						</a>
+						<c:if test="${isNoStock=='true'}">
+							<c:out value="${productNotAvailable}"></c:out>
+						</c:if>
+						<c:if test="${isStock=='true'}">
+							<a href="myCart/add/${selectedProduct.id}">
+								<button class="btn btn-success">
+									<span style="margin-right: 20px"
+										class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span>
+									Add to Cart
+								</button>
+							</a>
+						</c:if>
 					</div>
 				</div>
 

@@ -14,10 +14,97 @@
 	<div class="cw-content">
 		<div class="container">
 			<h3>
-				<i>Select an address </i> - <a href="accountInfo"
-					class="btn btn-primary">Click to add a new address</a>
+				<i>Select an address </i> -
+				<button type="button" class="btn btn-primary" data-toggle="modal"
+					data-target="#myModal">Click to add new address</button>
 			</h3>
+			<div id="myModal" class="modal fade" role="dialog">
+				<div class="modal-dialog">
 
+					<!-- Modal content-->
+					<div class="modal-content">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal">&times;</button>
+							<h4 class="modal-title">New Address</h4>
+						</div>
+						<div class="modal-body">
+							<form action="addAddress" class="form-horizontal" method="post">
+								<div class="form-group">
+									<label class="control-label col-sm-2">Name:</label>
+									<div class="col-sm-10">
+										<input type="text" class="form-control" name="name"
+											placeholder="Name" required />
+									</div>
+								</div>
+								<div class="form-group">
+									<label class="control-label col-sm-2">Phone:</label>
+									<div class="col-sm-10">
+										<input type="text" class="form-control" name="contact"
+											placeholder="Phone Number" required />
+									</div>
+								</div>
+								<div class="form-group">
+									<label class="control-label col-sm-2">Address Line 1:</label>
+									<div class="col-sm-10">
+										<input type="text" class="form-control" name="line1"
+											placeholder="Address Line 1" required />
+									</div>
+								</div>
+								<div class="form-group">
+									<label class="control-label col-sm-2">Address Line 2:</label>
+									<div class="col-sm-10">
+										<input type="text" class="form-control" name="line2"
+											placeholder="Address Line 2" required />
+									</div>
+								</div>
+								<div class="form-group">
+									<label class="control-label col-sm-2">City:</label>
+									<div class="col-sm-10">
+										<input type="text" class="form-control" name="city"
+											placeholder="City" required />
+									</div>
+								</div>
+								<div class="form-group">
+									<label class="control-label col-sm-2">State:</label>
+									<div class="col-sm-10">
+										<input type="text" class="form-control" name="state"
+											placeholder="State" required />
+									</div>
+								</div>
+								<div class="form-group">
+									<label class="control-label col-sm-2">Country:</label>
+									<div class="col-sm-10">
+										<input type="text" class="form-control" name="country"
+											placeholder="Country" required />
+									</div>
+								</div>
+								<div class="form-group">
+									<label class="control-label col-sm-2">Zip Code:</label>
+									<div class="col-sm-10">
+										<input type="text" class="form-control" name="zip"
+											placeholder="ZipCode" required />
+									</div>
+								</div>
+								<div class="form-group">
+									<div class="col-sm-offset-2 col-sm-10">
+										<button type="submit" class="btn btn-warning">
+											<i class="fa fa-user-plus" aria-hidden="true"></i> Add
+											Address
+										</button>
+									</div>
+								</div>
+								<input type="hidden" name="${_csrf.parameterName}"
+									value="${_csrf.token}" />
+							</form>
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-default"
+								data-dismiss="modal">Close</button>
+						</div>
+					</div>
+
+				</div>
+			</div>
 			<c:if test="${noAddressForUser=='true'}">
 				<h3>
 					<font color="red">You have No address added.</font> <a
@@ -30,7 +117,7 @@
 						<div class="list-group">
 							<a href="paymentInfo" class="list-group-item disabled">
 								<h4>Shipping Address</h4>
-							</a> <a href="paymentInfo" class="list-group-item"><h3>
+							</a> <a href="paymentInfo/${address.id}" class="list-group-item"><h3>
 									<c:out value="${address.name}" />
 								</h3>
 								<h4>

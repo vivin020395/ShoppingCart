@@ -11,7 +11,7 @@ body {
 .navbar.navbar-default.navbar-fixed-top {
 	background: #fff;
 	padding-top: 30px;
-	padding-bottom: 30px;
+	padding-bottom: 10px;
 }
 
 .title {
@@ -73,15 +73,16 @@ body {
 }
 
 .container {
-	padding-top: 100px;
+	padding-top: 100px;	
 }
 
 .carousel {
 	border: 1px solid #c3c3c3;
 	background-color: #ffffff;
 	color: #000000;
-	height: 400px;
+	height: 422px;
 	width: 100%;
+	padding-top:20px;
 }
 
 .carousel-caption {
@@ -91,8 +92,13 @@ body {
 }
 
 .cw-content {
-	padding-top: 30px;
+	padding-top: 20px;
 	padding-bottom: 50px;
+}
+
+.list-group-item[aria-expanded="true"] {
+	color: #000000;
+	background-color: Orange !important;
 }
 
 .footer {

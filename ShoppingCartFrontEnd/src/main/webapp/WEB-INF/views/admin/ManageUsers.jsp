@@ -34,7 +34,7 @@
 						<input type="text" class="form-control" name="email"
 							placeholder="email" value="${selectedUser.email}" />
 					</div>
-				</div>				
+				</div>
 				<div class="form-group">
 					<label class="control-label col-sm-2">Mobile:</label>
 					<div class="col-sm-10">
@@ -107,7 +107,7 @@
 						<input type="email" class="form-control" name="email"
 							placeholder="email" />
 					</div>
-				</div>			
+				</div>
 				<div class="form-group">
 					<label class="control-label col-sm-2">Role:</label>
 					<div class="col-sm-10">
@@ -136,7 +136,7 @@
 					<td>Name</td>
 					<td>ID</td>
 					<td>Contact</td>
-					<td>Email</td>					
+					<td>Email</td>
 					<td>Password</td>
 					<td>Role</td>
 					<td>Manage</td>
@@ -147,13 +147,12 @@
 					<td>${user.name}</td>
 					<td>${user.id}</td>
 					<td>${user.contact}</td>
-					<td>${user.email}</td>					
+					<td>${user.email}</td>
 					<td>${user.password}</td>
 					<td>${user.role}</td>
-					<td><a href="manage-user-delete/${user.id}"
-						class="btn btn-danger"><i class="fa fa-trash-o fa-lg"></i>
-							Delete</a> <a href="manage-user-edit/${user.id}" class="btn btn-info"><i
-							class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit</a></td>
+					<td><a href="manage-user-edit/${user.id}" class="btn btn-info">
+							Edit</a> <a href="manage-user-delete/${user.id}"
+						class="btn btn-danger">Delete</a></td>
 				</tr>
 			</c:forEach>
 		</table>

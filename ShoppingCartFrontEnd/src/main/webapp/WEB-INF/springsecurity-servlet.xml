@@ -21,11 +21,13 @@ http://www.springframework.org/schema/security/spring-security-4.1.xsd">
 			access="hasRole('ROLE_USER')" />
 		<security:intercept-url pattern="/cart**"
 			access="hasRole('ROLE_USER')" />
-		<security:intercept-url pattern="/Check**"
+		<security:intercept-url pattern="/CheckOutPage"
 			access="hasRole('ROLE_USER')" />
 		<security:intercept-url pattern="/Order**"
 			access="hasRole('ROLE_USER')" />
 		<security:intercept-url pattern="/payment**"
+			access="hasRole('ROLE_USER')" />
+		<security:intercept-url pattern="/Payment**"
 			access="hasRole('ROLE_USER')" />
 
 

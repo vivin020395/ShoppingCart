@@ -54,6 +54,28 @@
 							value="${selectedProduct.stock}" required>
 					</div>
 				</div>
+				<div class="form-group">
+					<label class="control-label col-sm-3" for="description">Product
+						Category:</label>
+					<div class="col-sm-9">
+						<select name="category">
+							<c:forEach var="category" items="${categoryList}">
+								<option value="${category.id}">${category.id}-${category.name}</option>
+							</c:forEach>
+						</select>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label col-sm-3" for="description">Product
+						Supplier:</label>
+					<div class="col-sm-9">
+						<select name="supplier">
+							<c:forEach var="supplier" items="${supplierList}">
+								<option value="${supplier.id}">${supplier.id}-${supplier.name}</option>
+							</c:forEach>
+						</select>
+					</div>
+				</div>
 
 				<div class="form-group">
 					<div class="col-sm-offset-3 col-sm-9">

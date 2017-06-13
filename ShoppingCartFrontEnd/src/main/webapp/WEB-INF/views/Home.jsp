@@ -37,7 +37,7 @@
 						class="icon-bar"></span><span class="icon-bar"></span><span
 						class="icon-bar"></span>
 				</button>
-				<a class="navbar-brand" href="#"><span class="title">COMPUTER
+				<a class="navbar-brand" href="HomePage"><span class="title">COMPUTER
 						ACCESSORIES</span></a>
 			</div>
 
@@ -133,6 +133,7 @@
 								aria-expanded="false">Settings<span class="caret"></span></a>
 								<ul class="dropdown-menu">
 									<li><a href="manageUsers">Manage Users</a></li>
+									<!-- <li><a href="status">Cart Status</a></li> -->
 									<li role="separator" class="divider"></li>
 									<li><a href="secure_logout">Sign Out</a></li>
 								</ul></li>
@@ -151,7 +152,9 @@
 					</c:otherwise>
 				</c:choose>
 			</div>
-
+			<marquee>
+				<font color="green">${message}</font>
+			</marquee>
 		</div>
 
 	</nav>
@@ -175,6 +178,10 @@
 	<c:if test="${isAdminClickedUsers=='true' }">
 		<jsp:include page="admin/ManageUsers.jsp"></jsp:include>
 	</c:if>
+
+	<%-- <c:if test="${isAdminClickedCart=='true' }">
+		<jsp:include page="admin/CartStatus.jsp"></jsp:include>
+	</c:if> --%>
 
 	<!-- Home -->
 	<c:if test="${isUserClickedHomePage=='true'}">
@@ -244,6 +251,11 @@
 	<!-- PaymentInfo -->
 	<c:if test="${isUserClickedPayment=='true'}">
 		<jsp:include page="PaymentInfo.jsp"></jsp:include>
+	</c:if>
+
+	<!-- Checkout -->
+	<c:if test="${isUserClickedCheckout=='true'}">
+		<jsp:include page="CheckOut.jsp"></jsp:include>
 	</c:if>
 
 	<script

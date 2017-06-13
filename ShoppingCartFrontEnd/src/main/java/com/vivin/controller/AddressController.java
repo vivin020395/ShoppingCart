@@ -37,12 +37,12 @@ public class AddressController {
 		String loggedInUserid = (String) session.getAttribute("loggedInUserID");
 		model.addAttribute("address", shippingAddressDAO.getByUserId(loggedInUserid));
 		model.addAttribute("addressList", shippingAddressDAO.list(loggedInUserid));
-		if (cartDAO.getCartSizeByStatus(loggedInUserid, 'N') == null) {
+		System.out.println(cartDAO.listCartByStatus(loggedInUserid, 'N'));
+		if (cartDAO.listCartByStatus(loggedInUserid, 'N').isEmpty()) {
 			model.addAttribute("isCartPage", "true");
 			model.addAttribute("isCartEmpty", "true");
 			model.addAttribute("emptyCart", "You're cart is empty.");
 			model.addAttribute("isCartPage", "true");
-			System.out.println(cartDAO.list(loggedInUserid));
 		} else {
 			model.addAttribute("isUserClickedAddress", "true");
 			if (shippingAddressDAO.getByUserId(loggedInUserid) == null) {

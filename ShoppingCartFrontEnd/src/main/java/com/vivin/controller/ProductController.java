@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.Collections;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -92,10 +93,9 @@ public class ProductController {
 
 	@RequestMapping("/viewProduct")
 	public String viewProductHome(Model model) {
-
 		model.addAttribute("isUserClickedListAllProducts", "true");
 		model.addAttribute("product", product);
-		model.addAttribute("productList", productDAO.list());
+		model.addAttribute("productList", productDAO.list());		
 		return "Home";
 
 	}
@@ -104,10 +104,17 @@ public class ProductController {
 	public String viewProduct(@PathVariable("id") String id, Model model) {
 		session.setAttribute("selectedProduct", productDAO.getProductById(id));
 		product = productDAO.getProductById(id);
+		if (product.getStock() == 0) {
+			session.setAttribute("isNoStock", "true");
+			session.setAttribute("isStock", "false");
+			session.setAttribute("productNotAvailable", "OUT OF STOCK");
+		} else {
+			session.setAttribute("isNoStock", "false");
+			session.setAttribute("isStock", "true");
+		}
 		String supplierId = product.getSupplier_id();
 		Supplier supplier = supplierDAO.getSupplierById(supplierId);
 		String supplierName = supplier.getName();
-		System.out.println(supplierName);
 		session.setAttribute("supplierName", supplierName);
 		return "redirect:/ProductDescriptionPage";
 	}
@@ -154,7 +161,8 @@ public class ProductController {
 	@PostMapping("/manage_product_update")
 	public ModelAndView updateProduct(@RequestParam("name") String name,
 			@RequestParam("description") String description, @RequestParam("price") String price,
-			@RequestParam("stock") int stock) {
+			@RequestParam("stock") int stock, @RequestParam("category") String categoryid,
+			@RequestParam("supplier") String supplierid) {
 		log.debug("Starting of updateProduct");
 		ModelAndView mv = new ModelAndView("redirect:/manageProducts");
 
@@ -162,9 +170,11 @@ public class ProductController {
 		product.setPrice(price);
 		product.setDescription(description);
 		product.setStock(stock);
+		product.setCategory_id(categoryid);
+		product.setSupplier_id(supplierid);
 		mv.addObject("isAdminClickedProducts", "true");
 		mv.addObject("isAdmin", "true");
-		if (productDAO.update(product) == true)
+		if (productDAO.update(product))
 			mv.addObject("Edited Successfully");
 		else
 			mv.addObject("Editing Failed");

@@ -121,11 +121,10 @@ public class UserController {
 		if (userDAO.save(user) == true) {
 			log.debug("saving credentials");
 			user = userDAO.get(id);
-			model.addAttribute("message", "Welcome " + user.getName() + "!");
+			model.addAttribute("message", "Account created.Please Login");
 			model.addAttribute("isUserClickedHomePage", "true");
 			model.addAttribute("categoryList", categoryDAO.list());
 			model.addAttribute("category", categoryDAO);
-
 			model.addAttribute("supplierList", supplierDAO.list());
 			model.addAttribute("supplier", supplierDAO);
 

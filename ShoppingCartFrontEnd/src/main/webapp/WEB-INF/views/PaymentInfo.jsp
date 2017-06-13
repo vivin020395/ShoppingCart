@@ -14,56 +14,20 @@
 <body style="padding-top: 50px">
 	<div class="cw-content">
 		<div class="container">
-			<h3>Choose Payment Option</h3>
-			<!-- <h4>Note: The buyer needs to provide valid government ID during Cash on delivery.</h4> -->
-			<div class="row">
-				<div class="col-md-4">
-					<div class="btn-group btn-group-vertical" role="group"
-						aria-label="...">
-						<div class="btn-group" role="group">
-							<button type="button" class="btn btn-default">
-								<i class="fa fa-credit-card" aria-hidden="true"></i> Credit
-								Card/Debit Card
-							</button>
-						</div>
-						<div class="btn-group" role="group">
-							<button type="button" class="btn btn-default" data-toggle="modal"
-								data-target="#myModal">
-								<i class="fa fa-money" aria-hidden="true"></i> Cash on Delivery
-							</button>
-						</div>
-					</div>
-				</div>
-				<div id="myModal" class="modal fade" role="dialog">
-					<div class="modal-dialog">
-
-						<!-- Modal content-->
-						<div class="modal-content">
-							<div class="modal-header">
-								<button type="button" class="close" data-dismiss="modal">&times;</button>
-								<h4 class="modal-title">Cash on Delivery</h4>
-							</div>
-							<div class="modal-body">
-								<h4>Please have exact change during the delivery.</h4>
-								<h3>
-									<i>Signature needed during the delivery.</i>
-								</h3>
-							</div>
-							<div class="modal-footer">
-								<a href="checkout"
-									class="subscribe btn btn-success btn-lg btn-block">Checkout</a>
-							</div>
-						</div>
-
-					</div>
-				</div>
-				<div class="col-md-6">
-					<div class="list-group">
+			<div class="collapse" id="demo3"></div>
+			<div id="MainMenu">
+				<a href="#cat7" class="list-group-item list-group-item-success"
+					data-toggle="collapse" data-parent="#MainMenu2"><center>
+						Click here to choose Payment Option</center></a>
+				<div class="collapse" id="cat7">
+					<a href="#SubMenu1" class="list-group-item" data-toggle="collapse"
+						data-parent="#SubMenu1"><center>Credit/Debit Card</center> </a>
+					<div class="collapse list-group-submenu" id="SubMenu1">
 						<div class="panel panel-default credit-card-box">
 							<div class="panel-heading display-table">
 								<div class="row display-tr">
 									<h3 class="panel-title display-td">
-										<center>Payment Details</center>
+										<center>Enter card details</center>
 									</h3>
 									<div class="display-td">
 										<img class="img-responsive pull-right"
@@ -73,7 +37,7 @@
 							</div>
 							<div class="panel-body">
 								<form role="form" id="payment-form" method="post"
-									action="checkout">
+									action="checkout/${selectedAddress.id}">
 									<div class="row">
 										<div class="col-xs-12">
 											<div class="form-group">
@@ -81,8 +45,8 @@
 												<div class="input-group">
 													<input type="tel" class="form-control" name="cardNumber"
 														placeholder="Valid Card Number" autocomplete="cc-number"
-														pattern="[0-9][0-9]{15}"
-														title="Card number should have 16 digits" required
+														pattern="[0-9][0-9]{6}"
+														title="Card number should have 7 digits" required
 														autofocus /> <span class="input-group-addon"><i
 														class="fa fa-credit-card"></i></span>
 												</div>
@@ -123,12 +87,41 @@
 									<input type="hidden" name="${_csrf.parameterName}"
 										value="${_csrf.token}" />
 								</form>
+
 							</div>
+
 						</div>
 					</div>
+					<a href="" class="list-group-item" data-toggle="modal"
+						data-target="#myModal"><center>Cash on Delivery</center></a>
 				</div>
 			</div>
 		</div>
+		<div class="row">
+			<div id="myModal" class="modal fade" role="dialog">
+				<div class="modal-dialog">
+
+					<!-- Modal content-->
+					<div class="modal-content">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal">&times;</button>
+							<h4 class="modal-title">Cash on Delivery</h4>
+						</div>
+						<div class="modal-body">
+							<h4>Please have exact change during the delivery.</h4>
+							<h3>
+								<i>Signature needed during the delivery.</i>
+							</h3>
+						</div>
+						<div class="modal-footer">
+							<a href="checkout/${selectedAddress.id}" class="btn btn-info ">Checkout</a>
+						</div>
+					</div>
+
+				</div>
+			</div>
+		</div>
+	</div>
 	</div>
 </body>
 </html>

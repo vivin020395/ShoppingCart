@@ -11,27 +11,15 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Computer World</title>
 </head>
+
 <body>
-	<sql:setDataSource var="myDS" driver="org.h2.Driver"
-		url="jdbc:h2:tcp://localhost/~/MyDB" user="sa" password="" />
-
-	<sql:query var="listProducts" dataSource="${myDS}">
-        SELECT * FROM product where category_id = 6;
-    </sql:query>
-	<sql:query var="listProducts2" dataSource="${myDS}">
-        SELECT * FROM product where category_id = 3;
-    </sql:query>
-	<sql:query var="listProducts3" dataSource="${myDS}">
-        SELECT * FROM product where category_id = 4;
-    </sql:query>
-
 	<div class="container">
 		<!-- carousel start-->
 		<div id="carousel1" class="carousel slide" data-ride="carousel">
 
 			<div class="carousel-inner" role="listbox">
 				<div class="item active">
-					<img src="resources/images/slider/andromeda.jpg"
+					<img src="resources/images/slider/intel i7.jpg"
 						class="center-block">
 				</div>
 				<div class="item">
@@ -39,7 +27,7 @@
 						alt="Second slide image" class="center-block">
 				</div>
 				<div class="item">
-					<img src="resources/images/slider/intel i7.jpg"
+					<img src="resources/images/slider/andromeda.jpg"
 						alt="Third slide image" class="center-block">
 				</div>
 				<div class="item">
@@ -82,41 +70,56 @@
 		<div class="container">
 			<div class="row">
 				<div class="col-md-4">
-					<div class="list-group">
-						<a href="#" class="list-group-item disabled">
-							<h4>Graphics Card</h4>
-						</a>
-						<c:forEach var="products" items="${listProducts.rows}">
-							<a href="viewProduct/${products.id}" class="list-group-item">${products.name}<span
-								class="badge">${products.stock}</span></a>
-						</c:forEach>
-					</div>
-
-					<div class="list-group">
-						<a href="#" class="list-group-item disabled">
-							<h4>CPU</h4>
-						</a>
-						<c:forEach var="products2" items="${listProducts2.rows}">
-							<a href="viewProduct/${products2.id}" class="list-group-item">${products2.name}<span
-								class="badge">${products2.stock}</span></a>
-						</c:forEach>
-					</div>
-
-					<div class="list-group">
-						<a href="#" class="list-group-item disabled">
-							<h4>Motherboard</h4>
-						</a>
-						<c:forEach var="products3" items="${listProducts3.rows}">
-							<a href="viewProduct/${products3.id}" class="list-group-item">${products3.name}<span
-								class="badge">${products3.stock}</span></a>
-						</c:forEach>
+					<div id="MainMenu">
+						<div class="list-group panel">
+							<a href="#cat3" class="list-group-item list-group-item-success"
+								data-toggle="collapse" data-parent="#MainMenu">${CPULIST.name}</a>
+							<div class="collapse" id="cat3">
+								<c:forEach var="products" items="${productList}">
+									<a href="viewProduct/${products.id}" class="list-group-item">${products.name}<span
+										class="badge">${products.stock}</span></a>
+								</c:forEach>
+							</div>
+							<a href="#cat4" class="list-group-item list-group-item-success"
+								data-toggle="collapse" data-parent="#MainMenu2">${MOTHERBOARDLIST.name}</a>
+							<div class="collapse" id="cat4">
+								<c:forEach var="products" items="${productList2}">
+									<a href="viewProduct/${products.id}" class="list-group-item">${products.name}<span
+										class="badge">${products.stock}</span></a>
+								</c:forEach>
+							</div>
+							<a href="#cat5" class="list-group-item list-group-item-success"
+								data-toggle="collapse" data-parent="#MainMenu2">${MEMORYLIST.name}</a>
+							<div class="collapse" id="cat5">
+								<c:forEach var="products" items="${productList3}">
+									<a href="viewProduct/${products.id}" class="list-group-item">${products.name}<span
+										class="badge">${products.stock}</span></a>
+								</c:forEach>
+							</div>
+							<a href="#cat6" class="list-group-item list-group-item-success"
+								data-toggle="collapse" data-parent="#MainMenu2">${VIDEOCARDLIST.name}</a>
+							<div class="collapse" id="cat6">
+								<c:forEach var="products" items="${productList4}">
+									<a href="viewProduct/${products.id}" class="list-group-item">${products.name}<span
+										class="badge">${products.stock}</span></a>
+								</c:forEach>
+							</div>
+							<a href="#cat7" class="list-group-item list-group-item-success"
+								data-toggle="collapse" data-parent="#MainMenu2">${STORAGELIST.name}</a>
+							<div class="collapse" id="cat7">
+								<c:forEach var="products" items="${productList5}">
+									<a href="viewProduct/${products.id}" class="list-group-item">${products.name}<span
+										class="badge">${products.stock}</span></a>
+								</c:forEach>
+							</div>
+						</div>
 					</div>
 
 				</div>
 				<div class="col-md-8">
 					<div class="col-md-4">
 						<img src="resources/images/featured/12.jpg"
-							"
+							
 							class="sc-item-img img-responsive" />
 						<h5>
 							<p class="text-center">Gigabyte Geforce GTX 1080</p>
@@ -128,7 +131,7 @@
 					</div>
 					<div class="col-md-4">
 						<img src="resources/images/featured/13.jpg"
-							"
+							
 							alt="Image could not be loaded"
 							class="sc-item-img img-responsive" />
 						<h5>
@@ -140,7 +143,7 @@
 					</div>
 					<div class="col-md-4">
 						<img src="resources/images/featured/14.jpg"
-							"
+							
 							class="sc-item-img img-responsive" />
 						<h5>
 							<p class="text-center">Gigabyte Geforce GTX 1060</p>
@@ -151,7 +154,7 @@
 					</div>
 					<div class="col-md-4">
 						<img src="resources/images/featured/15.jpg"
-							"
+							
 							class="sc-item-img img-responsive" />
 						<h5>
 							<p class="text-center">Gigabyte Geforce GTX Titan Z</p>
@@ -172,7 +175,7 @@
 					</div>
 					<div class="col-md-4">
 						<img src="resources/images/featured/2.jpg"
-							"
+							
 							class="sc-item-img img-responsive" />
 						<h5>
 							<p class="text-center">Intel 7th Gen Intel Core i5-4690K</p>
@@ -183,7 +186,7 @@
 					</div>
 					<div class="col-md-4">
 						<img src="resources/images/featured/3.jpg"
-							"
+							
 							class="sc-item-img img-responsive" />
 						<h5>
 							<p class="text-center">AMD Ryzen 7</p>

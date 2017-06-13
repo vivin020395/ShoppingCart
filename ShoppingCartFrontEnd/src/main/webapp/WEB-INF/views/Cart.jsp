@@ -13,13 +13,6 @@
 <title>ComputerWorld</title>
 </head>
 <body style="padding-top: 50px">
-	<sql:setDataSource var="myDS" driver="org.h2.Driver"
-		url="jdbc:h2:tcp://localhost/~/MyDB" user="sa" password="" />
-
-	<sql:query var="listProducts" dataSource="${myDS}">       
-        SELECT * FROM MYCART where userid ='${user}' and status='N';
-    </sql:query>
-
 	<div class="container">
 		<h3>
 			<i>My Cart</i>
@@ -45,14 +38,14 @@
 				</tr>
 			</thead>
 			<tbody>
-				<c:forEach var="products" items="${listProducts.rows}">
+				<c:forEach var="products" items="${cartList}">
 					<tr>
 						<td data-th="Product">
 							<div class="row">
 								<div class="col-sm-2 hidden-xs">
 									<img width="70" height="70"
 										src="resources/images/featured/
-								${products.productid}.jpg"
+								${products.productId}.jpg"
 										class="sc-item-img img-responsive" />
 								</div>
 								<div class="col-sm-10">

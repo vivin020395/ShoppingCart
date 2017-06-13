@@ -16,7 +16,7 @@
 	<div class="cw-content">
 		<div class="container">
 			<div align="center">
-			<%-- 	<font color="blue"><h2>Viewing all Products</h2></font>
+				<%-- 	<font color="blue"><h2>Viewing all Products</h2></font>
 				<div class="col-md-12">
 					<!-- c for each with image and product name price -->
 					<c:forEach var="product" items="${productList}">
@@ -37,9 +37,17 @@
 						</div>
 					</c:forEach>
 				</div> --%>
+
+
+
 				<table class="table table-striped">
 					<caption>
 						<h2>Viewing all Products</h2>
+						<select name="sortBy">
+							<option selected disabled>Sort by price</option>
+							<option value="low">Low to High</option>
+							<option value="high">High to Low</option>
+						</select>
 					</caption>
 					<tr>
 						<th>Image</th>
@@ -57,8 +65,13 @@
 							<td><c:out value="${product.name}" /><br> <b>Stock:${product.stock}</b></td>
 							<td><c:out value="${product.description}" /></td>
 							<td><c:out value="Rs.${product.price}" /></td>
-							<td><a href="myCart/add/${product.id}"><i
-									class="fa fa-shopping-cart"></i></a></td>
+							<c:if test="${product.stock>0}">
+								<td><a href="myCart/add/${product.id}"><i
+										class="fa fa-shopping-cart"></i> Add Product</a></td>
+							</c:if>
+							<c:if test="${product.stock==0}">
+								<td>out of stock</td>
+							</c:if>
 						</tr>
 					</c:forEach>
 				</table>

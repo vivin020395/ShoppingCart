@@ -140,7 +140,7 @@
 										</div>
 									</div>
 									<div class="form-group">
-										<label class="control-label col-sm-2">Address Line 1:</label>
+										<label class="control-label col-sm-2">Address Line 2:</label>
 										<div class="col-sm-10">
 											<input type="text" class="form-control" name="line2"
 												placeholder="Address Line 2" required />
@@ -262,7 +262,7 @@
 										</div>
 									</div>
 									<div class="form-group">
-										<label class="control-label col-sm-2">Address Line 1:</label>
+										<label class="control-label col-sm-2">Address Line 2:</label>
 										<div class="col-sm-10">
 											<input type="text" class="form-control" name="line2"
 												placeholder="Address Line 2" required />

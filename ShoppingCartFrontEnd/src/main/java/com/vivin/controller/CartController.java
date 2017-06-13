@@ -1,7 +1,10 @@
 package com.vivin.controller;
 
-import java.sql.Date;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Collection;
+import java.util.Date;
 import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
 
@@ -74,7 +77,9 @@ public class CartController {
 			}
 
 		}
-
+		session.setAttribute("loggedInUserid", loggedInUserid);
+		model.addAttribute("cartList", cartDAO.listCartByStatus(loggedInUserid, 'N'));
+		model.addAttribute("isUserLoggedIn", "true");
 		model.addAttribute("isCartPage", "true");
 		return "/Home";
 
@@ -87,12 +92,9 @@ public class CartController {
 		if (loggedInUserid == null) {
 			return "redirect:/LoginPage";
 		}
+		Product product = productDAO.getProductById(id);
 		log.debug("Starting of the method addToCart");
 		// get the product based on product id
-		Product product = productDAO.getProductById(id);
-		int stock = product.getStock() - 1;
-		product.setStock(stock);
-		productDAO.update(product);
 		myCart.setPrice(product.getPrice());
 		myCart.setName(product.getName());
 		myCart.setUserId(loggedInUserid);
@@ -111,9 +113,17 @@ public class CartController {
 			// increase the quantity and update it.
 			int presentQuantity = cartDAO.getQuantity(loggedInUserid, myCart.getName());
 			myCart.setQuantity(presentQuantity + 1);
-			cartDAO.update(myCart);
+			if (cartDAO.update(myCart)) {
+				int stock = product.getStock() - 1;
+				product.setStock(stock);
+				productDAO.update(product);
+			}
 		} else {
-			cartDAO.save(myCart);
+			if (cartDAO.save(myCart)) {
+				int stock = product.getStock() - 1;
+				product.setStock(stock);
+				productDAO.update(product);
+			}
 		}
 
 		// return "redirect:/views/home.jsp";
@@ -144,7 +154,6 @@ public class CartController {
 	@RequestMapping("/myCart/reduceQuantity/{id}")
 	public String reduceQuantity(@PathVariable("id") int cart_id) {
 		String loggedInUserid = (String) session.getAttribute("loggedInUserID");
-		int cartQuantity = myCart.getQuantity();
 		myCart = cartDAO.getCartById(cart_id);
 		int presentQuantity = cartDAO.getQuantity(loggedInUserid, myCart.getName());
 		if (presentQuantity == 1) {
@@ -162,12 +171,11 @@ public class CartController {
 		return "redirect:/CartPage";
 	}
 
-	@RequestMapping("/checkout")
-	public String cartCheckout(Model model) {
-		// Check whether products are there for this category or not
+	@RequestMapping("/checkout/{id}")
+	public String cartCheckout(Model model, @PathVariable("id") String id) {
 
 		String loggedInUserid = (String) session.getAttribute("loggedInUserID");
-		shippingAddress = shippingAddressDAO.getByUserId(loggedInUserid);
+		shippingAddress = shippingAddressDAO.getById(id);
 		StringBuffer address = new StringBuffer();
 		address.append(shippingAddress.getAddressLine1() + "\n");
 		address.append(shippingAddress.getAddressLine2() + ",");
@@ -175,15 +183,29 @@ public class CartController {
 		address.append(shippingAddress.getState() + ",");
 		address.append(shippingAddress.getCountry() + "-");
 		address.append(shippingAddress.getZipCode());
-		List<MyCart> myCart = cartDAO.list(loggedInUserid);
-		for (int i = 0; i < myCart.size(); i++) {
-			myCart.get(i).setStatus('P');
-			myCart.get(i).setAddress(address.toString());
-			cartDAO.update(myCart.get(i));
-		}
 		int randomNum = ThreadLocalRandom.current().nextInt(2, 6 + 1);
+		Date date = new Date();
+		Calendar cal = Calendar.getInstance();
+		cal.setTime(date);
+		cal.add(Calendar.DATE, randomNum);
+		Date deliveryDate = (Date) cal.getTime();
+		for (MyCart myCart : cartDAO.list(loggedInUserid)) {
+			myCart.setStatus('P');
+			myCart.setDays(randomNum);
+			myCart.setAddress(address.toString());
+			myCart.setDatePurchased(date);
+			myCart.setDeliveryDate(deliveryDate);
+			cartDAO.update(myCart);
+		}
 		session.setAttribute("deliveryDays", randomNum + "");
-		return "CheckOut";
+		session.setAttribute("OrderDate", date);
+		return "redirect:/CheckOutPage";
+	}
+
+	@RequestMapping("/CheckOutPage")
+	public String checkOutPage(Model model) {
+		model.addAttribute("isUserClickedCheckout", "true");
+		return "Home";
 	}
 
 	@RequestMapping("/myCart/delete/{id}")
@@ -197,7 +219,7 @@ public class CartController {
 		int stock = product.getStock() + cartQuantity;
 		product.setStock(stock);
 		productDAO.update(product);
-		if (cartDAO.delete(id) == true) {
+		if (cartDAO.delete(id)) {
 			mv.addObject("cartMessage", "Successfullly deleted from cart");
 		} else {
 			mv.addObject("cartMessage", "Failed to delete from cart");
