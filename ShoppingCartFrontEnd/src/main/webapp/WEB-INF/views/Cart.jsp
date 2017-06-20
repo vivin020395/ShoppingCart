@@ -82,7 +82,7 @@
 							Rs.${totalAmount}</strong></td>
 				</tr>
 				<tr>
-					<td><a href="HomePage" class="btn btn-warning"><i
+					<td><a href=viewProduct class="btn btn-warning"><i
 							class="fa fa-angle-left"></i> Continue Shopping</a></td>
 					<td colspan="2" class="hidden-xs"></td>
 					<td class="hidden-xs text-center"><strong>Total

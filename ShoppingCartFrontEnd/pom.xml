@@ -81,7 +81,7 @@
 			<artifactId>ShoppingCartBackEnd</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
 		</dependency>
-		
+
 		<!-- https://mvnrepository.com/artifact/org.springframework.security/spring-security-core -->
 		<dependency>
 			<groupId>org.springframework.security</groupId>
@@ -110,7 +110,7 @@
 			<version>${spring-security-version}</version>
 		</dependency>
 
-	
+
 
 		<!-- https://mvnrepository.com/artifact/org.webjars/bootstrap -->
 		<dependency>
@@ -118,9 +118,6 @@
 			<artifactId>bootstrap</artifactId>
 			<version>3.3.7</version>
 		</dependency>
-
-	
-
 
 	</dependencies>
 	<build>

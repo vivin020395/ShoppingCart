@@ -64,7 +64,7 @@
 				</div>
 
 
-				<div class="col-md-7">
+				<div class="col-md-8">
 					<!-- c for each with image and product name price -->
 					<c:forEach var="products" items="${productList4}">
 						<div class="col-md-4">
@@ -83,14 +83,7 @@
 							</div>
 						</div>
 					</c:forEach>
-				</div>
-				<div class="col-md-1">
-					<select name="sortBy">
-						<option selected disabled>Sort by price</option>
-						<option value="low">Low to High</option>
-						<option value="high">High to Low</option>
-					</select>
-				</div>
+				</div>				
 			</div>
 		</div>
 	</div>

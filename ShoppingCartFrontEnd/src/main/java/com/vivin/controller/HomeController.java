@@ -84,8 +84,10 @@ public class HomeController {
 				long diff = dispatchDate.getTime() - today.getTime();
 				long date = (diff / (1000 * 60 * 60 * 24));
 				myCart.setDays((int) date + 1);
-				if (myCart.getDays() != 0)
+				if (myCart.getDays() <= 0) {
+					myCart.setDays(0);
 					cartDAO.update(myCart);
+				}
 			}
 		}
 		// product
@@ -218,15 +220,8 @@ public class HomeController {
 	public String OrderHistoryPage(Model model) {
 		String loggedInUserid = (String) session.getAttribute("loggedInUserID");
 		user = userDAO.get(loggedInUserid);
-		model.addAttribute("user", loggedInUserid);
-		model.addAttribute("userName", user.getName());
-		model.addAttribute("userContact", user.getContact());
-		model.addAttribute("userEmail", user.getEmail());
-		model.addAttribute("total", cartDAO.getTotalAmount(loggedInUserid));
 		model.addAttribute("isUserClickedOrderHistory", "true");
 		model.addAttribute("cartList", cartDAO.listCartByStatus(loggedInUserid, 'P'));
-		model.addAttribute("OrderDate", myCart.getDatePurchased());
-
 		return "Home";
 	}
 

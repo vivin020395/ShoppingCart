@@ -15,6 +15,7 @@
 <body>
 
 	<div class="container">
+	<h2>Add/Delete/Update Category</h2>
 		<div id="UpdateCategory">
 			<form class="form-horizontal" action="manage_category_update"
 				method="post">

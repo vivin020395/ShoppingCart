@@ -19,6 +19,7 @@
 						<thead>
 							<tr>
 								<th>Product Name</th>
+								<th></th>
 								<th>Quantity</th>
 								<th>Price</th>
 								<th>Date Purchased</th>
@@ -31,9 +32,13 @@
 							<c:forEach var="products" items="${cartList}">
 								<tr>
 									<td><c:out value="${products.name}" /></td>
+									<td><img width="70" height="70"
+										src="resources/images/featured/
+								${products.productId}.jpg"
+										class="sc-item-img img-responsive" /></td>
 									<td>${products.quantity}</td>
 									<td>Rs.${products.price}</td>
-									<td>${OrderDate}</td>
+									<td>${products.datePurchased}</td>
 									<td>${products.address}</td>
 									<td><c:if test="${products.days>0}">
 											<div class="progress">
@@ -51,7 +56,7 @@
 
 
 									<td><c:if test="${products.days==0}">
-											<span class="label label-info">Completed</span>
+											<span class="label label-success">Completed</span>
 										</c:if> <c:if test="${products.days>0}">
 											<span class="label label-warning">Delivery in
 												${products.days} <c:if test="${products.days==1}">day</c:if>

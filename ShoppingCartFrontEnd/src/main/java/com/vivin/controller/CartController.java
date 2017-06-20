@@ -1,30 +1,19 @@
 package com.vivin.controller;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.Collection;
 import java.util.Date;
-import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
-
 import com.vivin.shoppingcart.dao.MyCartDAO;
 import com.vivin.shoppingcart.dao.ProductDAO;
 import com.vivin.shoppingcart.dao.ShippingAddressDAO;
@@ -53,7 +42,7 @@ public class CartController {
 	private HttpSession session;
 
 	@RequestMapping(value = "/CartPage", method = RequestMethod.GET)
-	public String myCart(HttpServletRequest request, Model model) {
+	public String myCart(Model model) {
 		log.debug("Starting of the method myCart");
 		model.addAttribute("myCart", new MyCart());
 
@@ -61,10 +50,7 @@ public class CartController {
 		// if you added the loggedInUserID in session
 		String loggedInUserid = (String) session.getAttribute("loggedInUserID");
 		if (loggedInUserid == null) {
-			Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-			loggedInUserid = auth.getName();
-			Collection<GrantedAuthority> authorities = (Collection<GrantedAuthority>) auth.getAuthorities();
-			authorities.contains("ROLE_USER");
+			return "redirect:/LoginPage";
 		}
 		if (loggedInUserid != null) {
 			model.addAttribute("user", loggedInUserid);
@@ -191,6 +177,7 @@ public class CartController {
 		Date deliveryDate = (Date) cal.getTime();
 		for (MyCart myCart : cartDAO.list(loggedInUserid)) {
 			myCart.setStatus('P');
+			myCart.setName(myCart.getName() + " ");
 			myCart.setDays(randomNum);
 			myCart.setAddress(address.toString());
 			myCart.setDatePurchased(date);

@@ -70,7 +70,19 @@ public class AdminController {
 		}
 		user = userDAO.get(userID);
 		if (user.getRole().equals("ROLE_USER")) {
-			mv = new ModelAndView("/HomePage");
+			mv.addObject("isUserLoggedIn", "true");
+			mv.addObject("isUserClickedHomePage", "true");
+			mv.addObject("productList", productDAO.getAllProductsByCategoryId("3"));
+			mv.addObject("productList2", productDAO.getAllProductsByCategoryId("4"));
+			mv.addObject("productList3", productDAO.getAllProductsByCategoryId("5"));
+			mv.addObject("productList4", productDAO.getAllProductsByCategoryId("6"));
+			mv.addObject("productList5", productDAO.getAllProductsByCategoryId("7"));
+			// category
+			mv.addObject("CPULIST", categoryDAO.getCategoryById("3"));
+			mv.addObject("MOTHERBOARDLIST", categoryDAO.getCategoryById("4"));
+			mv.addObject("MEMORYLIST", categoryDAO.getCategoryById("5"));
+			mv.addObject("VIDEOCARDLIST", categoryDAO.getCategoryById("6"));
+			mv.addObject("STORAGELIST", categoryDAO.getCategoryById("7"));
 			return mv;
 		}
 		mv.addObject("isAdminClickedCategories", "true");
@@ -89,10 +101,21 @@ public class AdminController {
 			mv = new ModelAndView("Login");
 			return mv;
 		}
-		user = userDAO.get(userID);		
+		user = userDAO.get(userID);
 		if (user.getRole().equals("ROLE_USER")) {
-			mv = new ModelAndView("/HomePage");
-			System.out.println(user.getRole() + " inside if statment");
+			mv.addObject("isUserLoggedIn", "true");
+			mv.addObject("isUserClickedHomePage", "true");
+			mv.addObject("productList", productDAO.getAllProductsByCategoryId("3"));
+			mv.addObject("productList2", productDAO.getAllProductsByCategoryId("4"));
+			mv.addObject("productList3", productDAO.getAllProductsByCategoryId("5"));
+			mv.addObject("productList4", productDAO.getAllProductsByCategoryId("6"));
+			mv.addObject("productList5", productDAO.getAllProductsByCategoryId("7"));
+			// category
+			mv.addObject("CPULIST", categoryDAO.getCategoryById("3"));
+			mv.addObject("MOTHERBOARDLIST", categoryDAO.getCategoryById("4"));
+			mv.addObject("MEMORYLIST", categoryDAO.getCategoryById("5"));
+			mv.addObject("VIDEOCARDLIST", categoryDAO.getCategoryById("6"));
+			mv.addObject("STORAGELIST", categoryDAO.getCategoryById("7"));
 			return mv;
 		}
 		mv.addObject("isAdminClickedSuppliers", "true");
@@ -116,13 +139,19 @@ public class AdminController {
 		System.out.println(user.getRole());
 		log.debug(user.getId());
 		if (user.getRole().equals("ROLE_USER")) {
+			mv.addObject("isUserLoggedIn", "true");
 			mv.addObject("isUserClickedHomePage", "true");
-			mv.addObject("product", product);
-			mv.addObject("productList", productDAO.list());
-			mv.addObject("supplier", supplier);
-			mv.addObject("supplierList", supplierDAO.list());
-			mv.addObject("category", category);
-			mv.addObject("categoryList", categoryDAO.list());
+			mv.addObject("productList", productDAO.getAllProductsByCategoryId("3"));
+			mv.addObject("productList2", productDAO.getAllProductsByCategoryId("4"));
+			mv.addObject("productList3", productDAO.getAllProductsByCategoryId("5"));
+			mv.addObject("productList4", productDAO.getAllProductsByCategoryId("6"));
+			mv.addObject("productList5", productDAO.getAllProductsByCategoryId("7"));
+			// category
+			mv.addObject("CPULIST", categoryDAO.getCategoryById("3"));
+			mv.addObject("MOTHERBOARDLIST", categoryDAO.getCategoryById("4"));
+			mv.addObject("MEMORYLIST", categoryDAO.getCategoryById("5"));
+			mv.addObject("VIDEOCARDLIST", categoryDAO.getCategoryById("6"));
+			mv.addObject("STORAGELIST", categoryDAO.getCategoryById("7"));
 			return mv;
 		}
 		log.debug("Starting of the method manageProducts");
