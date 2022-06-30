@@ -14,7 +14,7 @@
 		<spring-version>4.3.8.RELEASE</spring-version>
 		<spring-security-version>4.1.4.RELEASE</spring-security-version>
 		<servlet-version>3.1.0</servlet-version>
-		<spring-webflow-version>2.4.4.RELEASE</spring-webflow-version>
+		<spring-webflow-version>2.4.6.RELEASE</spring-webflow-version>
 	</properties>
 	<dependencies>
 
